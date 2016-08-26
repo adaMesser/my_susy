@@ -1,0 +1,75 @@
+@each $key, $grid_settings in $grid {
+  $susy: (
+    //global-box-sizing: border-box,
+    debug: (image: show),
+
+  );
+  .wrap-#{$key} {
+    @include container($key);
+
+    width: map_get($grid_settings, width);
+    border: 1px #999999 solid;
+
+
+    @for $i from 1 through $key {
+      .section-1 {
+        .ag_#{$i} {
+          @include span($i of $key);
+
+          &:nth-child(odd) {
+            @include last;
+          }
+
+          &:nth-child(even) {
+            @include break;
+          }
+
+          &:before {
+            content: "#{$i}/#{$key}";
+          }
+        }
+      }
+
+      .section-2 {
+
+        .ag_#{$i} {
+          @include span($i of $key);
+          float: left;
+
+          &:before {
+            content: "#{$i}/#{$key}";
+          }
+        }
+        .prefix_#{$i} {
+          @include pre($i of $key);
+        }
+
+        .suffix_#{$i} {
+          @include post($i of $key);
+        }
+      }
+
+      .section-3 {
+
+        .ag_#{$i} {
+          @include span($i of $key/2);
+
+          float: left;
+
+          &:before {
+            content: "#{$i}/#{$key}";
+          }
+        }
+
+        .push_#{$i} {
+          @include span($i of $key);
+        }
+
+        .pull_#{$i} {
+          @include span($i of $key last);
+        }
+      }
+
+    }
+  }
+}

@@ -1,0 +1,12 @@
+@import "grid-column";
+
+@function col-indent($grid-settings, $cols) {
+  $g: map_get($grid-settings, 'gutter');
+
+  @return $cols * (column-width($grid-settings) + $g);
+}
+
+@function col-margin($grid-settings, $cols) {
+  $g: map-get($grid-settings, 'gutter');
+  @return col-indent($grid-settings, $cols) + $g / 2;
+}
